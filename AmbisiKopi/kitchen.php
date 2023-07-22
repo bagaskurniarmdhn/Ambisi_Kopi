@@ -19,66 +19,6 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
         </div>
         <div class="card-body">
 
-            <!-- Modal Add New Item-->
-            <div class="modal fade" id="additem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-fullscreen-md-down">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Menu</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="needs-validation" novalidate action="process/process-input-orderitem.php"
-                                method="POST">
-                                <input type="hidden" name="ordercode" value="<?php echo $kode_order ?>">
-                                <input type="hidden" name="meja" value="<?php echo $meja ?>">
-                                <input type="hidden" name="customer" value="<?php echo $customer ?>">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="form-floating mb-3">
-                                            <select class="form-select" name="menu" id="">
-                                                <option selected value="">Pilih Menu</option>
-                                                <?php
-                                                foreach ($select_menu as $value) {
-                                                    echo "<option value=$value[id]>$value[menu_name]</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                            <label for="menu">Menu Makanan/Minuman</label>
-                                            <div class="invalid-feedback">Pilih Menu</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-floating mb-3">
-                                            <input type="number" class="form-control" id="floatingInput"
-                                                placeholder="Jumlah Porsi" name="total" required>
-                                            <label for="floatingInput">Jumlah Porsi</label>
-                                            <div class="invalid-feedback">Masukkan Jumlah Porsi</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="floatingPassword"
-                                                placeholder="Catatan" name="note">
-                                            <label for="floatingPassword">Catatan</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" name="input_orderitem_validate"
-                                        value="1234">Save changes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Modal Add New Item-->
-
             <?php
             if (empty($result)) {
                 echo "Data menu tidak ada";
@@ -86,8 +26,8 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                 foreach ($result as $row) {
                     ?>
 
-                    <!-- Modal Edit-->
-                    <div class="modal fade" id="ModalEdit<?php echo $row['id_list_order'] ?>" tabindex="-1"
+                    <!-- Modal Terima-->
+                    <div class="modal fade" id="ModalReady<?php echo $row['id_list_order'] ?>" tabindex="-1"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-fullscreen-md-down">
                             <div class="modal-content">
@@ -96,13 +36,13 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="needs-validation" novalidate action="process/process-edit-orderitem.php"
+                                    <form class="needs-validation" novalidate action="process/process-acc-orderitem.php"
                                         method="POST">
                                         <input type="hidden" name="id" value="<?php echo $row['id_list_order'] ?>">
                                         <div class="row">
                                             <div class="col-lg-8">
                                                 <div class="form-floating mb-3">
-                                                    <select class="form-select" name="menu" id="">
+                                                    <select disabled class="form-select" name="menu" id="">
                                                         <option selected value="">Pilih Menu</option>
                                                         <?php
                                                         foreach ($select_menu as $value) {
@@ -120,7 +60,7 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-floating mb-3">
-                                                    <input type="number" class="form-control" id="floatingInput"
+                                                    <input disabled type="number" class="form-control" id="floatingInput"
                                                         placeholder="Jumlah Porsi" name="total" required
                                                         value="<?php echo $row['total'] ?>">
                                                     <label for="floatingInput">Jumlah Porsi</label>
@@ -140,7 +80,7 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary" name="edit_orderitem_validate"
+                                            <button type="submit" class="btn btn-primary" name="acc_order_validate"
                                                 value="1234">Save changes</button>
                                         </div>
                                     </form>
@@ -148,27 +88,27 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                             </div>
                         </div>
                     </div>
-                    <!-- End Modal Edit-->
+                    <!-- End Modal Terima-->
 
                     <?php
                 }
                 ?>
 
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr class="text-nowrap">
-                            <th scope="col">No</th>
-                            <th scope="col">Kode Order</th>
-                            <th scope="col">Waktu Order</th>
-                            <th scope="col">Menu</th>
-                            <th scope="col">Qty</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Catatan</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="text-nowrap">
+                                <th scope="col">No</th>
+                                <th scope="col">Kode Order</th>
+                                <th scope="col">Waktu Order</th>
+                                <th scope="col">Menu</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Catatan</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <?php
                         $no = 1;
                         foreach ($result as $row) {
@@ -197,12 +137,15 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal"
-                                            data-bs-target="#ModalEdit<?php echo $row['id_list_order'] ?>"><i
-                                                class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#ModalDelete<?php echo $row['id_list_order'] ?>"><i
-                                                class="bi bi-trash3"></i></button>
+                                        <button
+                                            class="<?php echo (!empty($row['status'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-primary btn-sm me-1"; ?>"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#ModalReady<?php echo $row['id_list_order'] ?>">Terima</button>
+                                        <button
+                                            class="<?php echo (empty($row['status']) || $row['status'] != 1) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-success btn-sm me-1"; ?>"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#ModalDelete<?php echo $row['id_list_order'] ?>">Siap
+                                            Saji</button>
                                     </div>
                                 </td>
                             </tr>

@@ -1,12 +1,12 @@
 <?php
 include "process/connect.php";
 date_default_timezone_set('Asia/Jakarta');
-$query = mysqli_query($conn, "SELECT tb_order.*,name, SUM(price*total) AS theprice FROM tb_order
+$query = mysqli_query($conn, "SELECT tb_order.*, tb_payment.*,name, SUM(price*total) AS theprice FROM tb_order
 LEFT JOIN tb_user ON tb_user.id = tb_order.waiter
 LEFT JOIN tb_list_order ON tb_list_order.ordercode = tb_order.id_order
 LEFT JOIN tb_menulist ON tb_menulist.id = tb_list_order.menu
 LEFT JOIN tb_payment ON tb_payment.id_payment = tb_order.id_order
-GROUP BY id_order");
+GROUP BY id_order ORDER BY time_payment DESC");
 while ($record = mysqli_fetch_array($query)) {
     $result[] = $record;
 }
@@ -172,7 +172,7 @@ while ($record = mysqli_fetch_array($query)) {
                     <!-- Modal Delete-->
 
                     <?php
-                }   
+                }
                 ?>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -214,7 +214,7 @@ while ($record = mysqli_fetch_array($query)) {
                                     <?php echo $row['name'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['status'] ?>
+                                    <?php echo (!empty($row['id_payment'])) ? "<span class='badge text-bg-success'>dibayar</span>" : ""; ?>
                                 </td>
                                 <td>
                                     <?php echo $row['order_time'] ?>
@@ -225,10 +225,14 @@ while ($record = mysqli_fetch_array($query)) {
                                             href="./?x=orderitem&order=<?php
                                             echo $row['id_order'] . "&meja=" . $row['meja'] . "&customer=" . $row['customer'] ?>">
                                             <i class="bi bi-eye"></i></a>
-                                        <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal"
+                                        <button
+                                            class="<?php echo (!empty($row['id_payment'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-warning btn-sm me-1"; ?>"
+                                            data-bs-toggle="modal"
                                             data-bs-target="#ModalEdit<?php echo $row['id_order'] ?>"><i
                                                 class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        <button
+                                            class="<?php echo (!empty($row['id_payment'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-danger btn-sm me-1"; ?>"
+                                            data-bs-toggle="modal"
                                             data-bs-target="#ModalDelete<?php echo $row['id_order'] ?>"><i
                                                 class="bi bi-trash3"></i></button>
                                     </div>

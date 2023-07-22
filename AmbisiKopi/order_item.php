@@ -3,7 +3,7 @@ include "process/connect.php";
 $query = mysqli_query($conn, "SELECT *, SUM(price*total) AS theprice FROM tb_list_order
 LEFT JOIN tb_order ON tb_order.id_order = tb_list_order.ordercode
 LEFT JOIN tb_menulist ON tb_menulist.id = tb_list_order.menu
-
+LEFT JOIN tb_payment ON tb_payment.id_payment = tb_order.id_order
 GROUP BY id_list_order
 HAVING tb_list_order.ordercode = $_GET[order]");
 $kode_order = $_GET['order'];
@@ -351,10 +351,10 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal"
+                                        <button class="<?php echo(!empty($row['id_payment'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-warning btn-sm me-1"; ?>" data-bs-toggle="modal"
                                             data-bs-target="#ModalEdit<?php echo $row['id_list_order'] ?>"><i
                                                 class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        <button class="<?php echo(!empty($row['id_payment'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-danger btn-sm me-1"; ?>" data-bs-toggle="modal"
                                             data-bs-target="#ModalDelete<?php echo $row['id_list_order'] ?>"><i
                                                 class="bi bi-trash3"></i></button>
                                     </div>
@@ -380,9 +380,9 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
             }
             ?>
             <div>
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#additem"><i
+                <button class="<?php echo(!empty($row['id_payment'])) ? "btn btn-secondary disabled" : "btn btn-success"; ?>" data-bs-toggle="modal" data-bs-target="#additem"><i
                         class="bi bi-plus-circle"></i> Tambah Item</button>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#payitem"><i
+                <button class="<?php echo(!empty($row['id_payment'])) ? "btn btn-secondary disabled" : "btn btn-primary"; ?>" data-bs-toggle="modal" data-bs-target="#payitem"><i
                         class="bi bi-cash-coin"></i> Bayar</button>
             </div>
         </div>
