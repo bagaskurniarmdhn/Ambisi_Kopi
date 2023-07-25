@@ -242,7 +242,7 @@ while ($record = mysqli_fetch_array($query)) {
                         </div>
                     </div>
                 </div>
-                <!-- Modal Edit-->
+                <!-- End Modal Edit-->
 
                 <!-- Modal Delete-->
                 <div class="modal fade" id="ModalDelete<?php echo $row['id'] ?>" tabindex="-1"
@@ -269,7 +269,7 @@ while ($record = mysqli_fetch_array($query)) {
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-danger" name="input_user_validate" value="1234"
+                                        <button type="submit" class="btn btn-danger" name="delete_user_validate" value="1234"
                                             <?php echo ($row['username'] == $_SESSION['username_ambisikopi']) ?
                                                 'disabled' : ''; ?>>Delete</button>
                                     </div>
@@ -355,24 +355,3 @@ while ($record = mysqli_fetch_array($query)) {
     </div>
 </div>
 
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-</script>

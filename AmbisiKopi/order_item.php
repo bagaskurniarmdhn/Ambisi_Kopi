@@ -96,7 +96,7 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary" name="input_orderitem_validate"
-                                        value="1234">Save changes</button>
+                                        value="1234">Tambah Item</button>
                                 </div>
                             </form>
                         </div>
@@ -340,7 +340,13 @@ $select_menu = mysqli_query($conn, "SELECT id,menu_name FROM tb_menulist");
                                     <?php echo $row['total'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $row['status'] ?>
+                                    <?php
+                                    if ($row['status'] == 1) {
+                                        echo "<span class='badge text-bg-warning'>Masuk ke dapur</span> ";
+                                    } elseif ($row['status'] == 2) {
+                                        echo "<span class='badge text-bg-primary'>Siap disajikan</span> ";
+                                    } 
+                                    ?>
                                 </td>
                                 <td>
                                     <?php echo $row['note'] ?>

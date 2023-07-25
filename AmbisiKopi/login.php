@@ -1,7 +1,7 @@
 <?php
-    if(!empty($_SESSION['username_ambisikopi'])){
-        header('location:home');
-    }
+if (!empty($_SESSION['username_ambisikopi'])) {
+  header('location:home');
+}
 ?>
 
 <!doctype html>
@@ -20,7 +20,7 @@
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -104,16 +104,17 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary text-center">
   <main class="form-signin w-100 m-auto">
     <form class="needs-validation" novalidate action="process/process-login.php" method="POST">
-    <i class="bi bi-cup-hot-fill fs-1"></i>
+      <i class="bi bi-cup-hot-fill fs-1"></i>
       <h1 class="h3 mb-3 fw-normal">Please Login</h1>
-
       <div class="form-floating">
-        <input name="username" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+        <input name="username" type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+          required>
         <label for="floatingInput">Email address</label>
         <div class="invalid-feedback">Input The Username</div>
       </div>
       <div class="form-floating">
-        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password"
+          required>
         <label for="floatingPassword">Password</label>
         <div class="invalid-feedback">Input The Password</div>
       </div>
@@ -125,10 +126,10 @@
         </label>
       </div>
       <button class="btn btn-primary w-100 py-2" type="submit" name="submit_validate" value="abc">Sign in</button>
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; 2023</p>
     </form>
   </main>
-  
+
   <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (() => {

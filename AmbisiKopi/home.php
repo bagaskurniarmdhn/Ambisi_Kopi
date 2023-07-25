@@ -12,11 +12,11 @@
                                 alt="gambar">
                         </div>
                         <div class="carousel-item">
-                            <img src="./assets/img/butter.jpg" class="img-fluid" style="height:250px; width:1000px alt="
+                            <img src="./assets/img/home1.jpg" class="img-fluid" style="height:250px; width:1000px" alt="
                                 gambar">
                         </div>
                         <div class="carousel-item">
-                            <img src="./assets/img/french.jpg" class="img-fluid" style="height:250px; width:1000px"
+                            <img src="./assets/img/home2.jpg" class="img-fluid" style="height:250px; width:1000px"
                                 alt="gambar">
                         </div>
                     </div>

@@ -12,7 +12,7 @@ $target_dir = "../assets/img/" . $kode_rand;
 $target_file = $target_dir . basename($_FILES['photo']['name']);
 $imageType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-if (!empty($_POST['input_menu_validate'])) {
+if (!empty($_POST['edit_menu_validate'])) {
     //cek apakah gambar or bkn
     $cek = getimagesize($_FILES['photo']['tmp_name']);
     if ($cek === false) {

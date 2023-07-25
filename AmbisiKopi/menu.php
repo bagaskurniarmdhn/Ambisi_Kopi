@@ -98,7 +98,7 @@ $select_menu_category = mysqli_query($conn, "SELECT id_category,menu_category FR
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary" name="input_menu_validate"
-                                        value="1234">Save changes</button>
+                                        value="1234">Tambah Menu</button>
                                 </div>
                             </form>
                         </div>
@@ -195,13 +195,12 @@ $select_menu_category = mysqli_query($conn, "SELECT id_category,menu_category FR
                     <div class="modal-dialog modal-xl modal-fullscreen-md-down">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Menu</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Menu</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form class="needs-validation" novalidate action="process/process-edit-menu.php"
                                     method="POST" enctype="multipart/form-data">
-                                    <input type="text" value="<?php echo $row['id'] ?>" name="id">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="input-group mb-3">
@@ -273,8 +272,8 @@ $select_menu_category = mysqli_query($conn, "SELECT id_category,menu_category FR
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" name="input_menu_validate"
-                                            value="1234">Save changes</button>
+                                        <button type="submit" class="btn btn-primary" name="edit_menu_validate"
+                                            value="1234">Simpan Perubahan</button>
                                     </div>
                                 </form>
                             </div>
@@ -303,7 +302,7 @@ $select_menu_category = mysqli_query($conn, "SELECT id_category,menu_category FR
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-danger" name="input_user_validate"
+                                        <button type="submit" class="btn btn-danger" name="delete_menu_validate"
                                             value="1234">Delete</button>
                                     </div>
                                 </form>
@@ -360,7 +359,7 @@ $select_menu_category = mysqli_query($conn, "SELECT id_category,menu_category FR
                                         <?php echo $row['menu_category'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row['price'] ?>
+                                        Rp. <?php echo number_format($row['price'], 0, ',', '.') ?>
                                     </td>
                                     <td>
                                         <?php echo $row['stock'] ?>
